@@ -11,8 +11,16 @@ public class Prompter {
         Scanner scanner = new Scanner(System.in);
         System.out.print("What type of item are in the Jar?:  ");
         String itemType = scanner.nextLine();
-        System.out.print("What is the maximum amount of " + itemType + "?: ");
-        int maxNumbersOfItems = Integer.parseInt(scanner.nextLine());
+        int maxNumbersOfItems;  
+      
+        do {
+          System.out.print("What is the maximum amount of " + itemType + "?: ");
+          maxNumbersOfItems = Integer.parseInt(scanner.nextLine());
+          if (maxNumbersOfItems > 1000) {
+           System.out.print("Your guess must be less than 1000 \n"); 
+          }
+        } while (maxNumbersOfItems > 1000);  
+      
         jar.setItemName(itemType);
         jar.setMaxNumberOfItems(maxNumbersOfItems);
     }
@@ -33,6 +41,10 @@ public class Prompter {
             if (guess == randomNumber) {
                 System.out.print("Congratulations!!! You got it in " + tries + " attempts");
                 break;
+            } else if (guess > randomNumber) {
+                System.out.print("Your guess is too high \n");
+            } else {
+                System.out.print("Your guess is too low \n");
             }
         }
     }
